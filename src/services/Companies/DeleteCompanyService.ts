@@ -4,16 +4,16 @@ interface IRequest {
     id: string
 }
 
-export class DeleteProductService {
+export class DeleteCompanyService {
     async execute({id} : IRequest){
         try {
-            return await prismaClient.products.delete({
+            return await prismaClient.companies.delete({
                 where: {
                     id: id
                 }
             })
         }catch(e){
-            throw new Error("Email doesn't exist!")
+            throw new Error("Company doesn't exist!")
         }
     }
 }

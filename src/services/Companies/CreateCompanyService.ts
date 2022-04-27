@@ -4,16 +4,16 @@ interface IRequest {
     name: string
 }
 
-export class CreateProductService {
+export class CreateCompanyService {
     async execute({name}: IRequest){
         try {
-            return await prismaClient.products.create({
+            return await prismaClient.companies.create({
                 data: {
                     name: name
                 }
             })
         }catch(e){
-            throw new Error("Email already exists")
+            throw new Error("Company already exists")
         }
     }
 }

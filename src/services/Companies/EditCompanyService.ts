@@ -5,10 +5,10 @@ interface IRequest {
     name: string
 }
 
-export class EditProductService {
+export class EditCompanyService {
     async execute({id, name}: IRequest){
         try {
-            return await prismaClient.products.update({
+            return await prismaClient.companies.update({
                 where: {
                     id: id
                 },
