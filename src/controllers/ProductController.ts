@@ -2,7 +2,7 @@ import { Request, Response } from "express";
 import { CreateProductService } from "../services/Products/CreateProductService";
 import { DeleteProductService } from "../services/Products/DeleteProductService";
 import { EditProductService } from "../services/Products/EditProductService";
-import { ListProductService } from "../services/Products/ListProductsService";
+import { ListProductService } from "../services/Products/ListProductService";
 
 export class ProductController {
     async index(request: Request, response: Response){
