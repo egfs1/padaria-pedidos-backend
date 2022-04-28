@@ -5,7 +5,7 @@ interface IRequest {
     name: string
 }
 
-export class EditProductService {
+export class UpdateProductService {
     async execute({id, name}: IRequest){
         try {
             return await prismaClient.products.update({
