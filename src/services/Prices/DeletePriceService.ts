@@ -4,16 +4,16 @@ interface IRequest {
     id: string
 }
 
-export class DeleteProductService {
+export class DeletePriceService {
     async execute({id} : IRequest){
         try {
-            return await prismaClient.products.delete({
+            return await prismaClient.prices.delete({
                 where: {
                     id: id
                 }
             })
         }catch(e){
-            throw new Error("Product not found!")
+            throw new Error("Price not found!")
         }
     }
 }

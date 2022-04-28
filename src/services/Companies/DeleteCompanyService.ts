@@ -13,7 +13,7 @@ export class DeleteCompanyService {
                 }
             })
         }catch(e){
-            throw new Error("Company doesn't exist!")
+            throw new Error("Company not found!")
         }
     }
 }

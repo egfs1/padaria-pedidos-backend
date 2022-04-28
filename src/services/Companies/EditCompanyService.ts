@@ -17,7 +17,7 @@ export class EditCompanyService {
                 }
             })
         }catch(e){
-            throw new Error("Something is wrong")
+            throw new Error("Company not found!")
         }
     }
 }

@@ -13,7 +13,7 @@ export class CreateProductService {
                 }
             })
         }catch(e){
-            throw new Error("Email already exists")
+            throw new Error("Product already exists")
         }
     }
 }
