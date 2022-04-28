@@ -52,10 +52,10 @@ export class CreateOrderService {
                     value: totalValue
                 }
             })
-            
+
+            return order
         } catch (error) {
             throw new Error('Something is wrong')
         }
-
     }
 }

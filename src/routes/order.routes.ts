@@ -8,6 +8,6 @@ const orderController = new OrderController()
 router.get('/', orderController.index)
 router.post('/save', orderController.create)
 router.delete('/delete', orderController.delete)
-router.put('/update', orderController.edit)
+router.put('/update', orderController.update)
 
 export default router

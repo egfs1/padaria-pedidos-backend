@@ -8,6 +8,6 @@ const productController = new ProductController()
 router.get('/', productController.index)
 router.post('/save', productController.create)
 router.delete('/delete', productController.delete)
-router.put('/update/:id', productController.edit)
+router.put('/update/:id', productController.update)
 
 export default router

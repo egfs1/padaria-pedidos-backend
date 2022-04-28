@@ -1,16 +1,16 @@
 import { Request, Response } from "express"
 import { CreatePriceService } from "../services/Prices/CreatePriceService"
 import { DeletePriceService } from "../services/Prices/DeletePriceService"
-import { EditPriceService } from "../services/Prices/EditPriceService"
+import { UpdatePriceService } from "../services/Prices/UpdatePriceService"
 import { ListPriceService } from "../services/Prices/ListPriceService"
 
 export class PriceController {
     async index(request: Request, response: Response){
         const listPriceService = new ListPriceService()
 
-        const prices = await listPriceService.execute()
+        const result = await listPriceService.execute()
 
-        return response.json(prices)
+        return response.json(result)
     }
 
     async create(request: Request, response: Response){
@@ -32,12 +32,12 @@ export class PriceController {
 
     }
 
-    async edit(request: Request, response: Response){
+    async update(request: Request, response: Response){
         const {id, price, company_id, product_id} = request.body
 
-        const editPriceService = new EditPriceService()
+        const updatePriceService = new UpdatePriceService()
 
-        await editPriceService.execute({id, price, company_id, product_id})
+        await updatePriceService.execute({id, price, company_id, product_id})
 
     }
 }

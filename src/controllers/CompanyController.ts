@@ -1,6 +1,6 @@
 import { CreateCompanyService } from "../services/Companies/CreateCompanyService"
 import { DeleteCompanyService } from "../services/Companies/DeleteCompanyService"
-import { EditCompanyService } from "../services/Companies/EditCompanyService"
+import { UpdateCompanyService } from "../services/Companies/UpdateCompanyService"
 import { ListCompanyService } from "../services/Companies/ListCompanyService"
 import { Request, Response } from "express"
 
@@ -32,12 +32,12 @@ export class CompanyController {
 
     }
 
-    async edit(request: Request, response: Response){
+    async update(request: Request, response: Response){
         const {id, name} = request.body
 
-        const editCompanyService = new EditCompanyService()
+        const updateCompanyService = new UpdateCompanyService()
 
-        await editCompanyService.execute({id, name})
+        await updateCompanyService.execute({id, name})
 
     }
 }

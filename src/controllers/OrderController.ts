@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import { CreateOrderService } from "../services/Orders/CreateOrderService";
-import { EditOrderService } from "../services/Orders/EditOrderService";
+import { UpdateOrderService } from "../services/Orders/UpdateOrderService";
 import { DeleteOrderService } from '../services/Orders/DeleteOrderService'
 import { ListOrderService } from "../services/Orders/ListOrderService";
 
@@ -9,9 +9,9 @@ export class OrderController {
     async index(request: Request, response: Response){
         const listOrderService = new ListOrderService()
 
-        const orders = listOrderService.execute()
+        const result = listOrderService.execute()
 
-        return response.json(orders)
+        return response.json(result)
     }
 
     async create(request: Request, response: Response){
@@ -23,7 +23,9 @@ export class OrderController {
 
         const createOrderService = new CreateOrderService()
 
-        await createOrderService.execute({company_id, date, product_id, quantity})
+        const order = await createOrderService.execute({company_id, date, product_id, quantity})
+    
+        return response.json(order)
     }
 
     async delete(request: Request, response: Response){
@@ -35,7 +37,7 @@ export class OrderController {
 
     }
 
-    async edit(request: Request, response: Response){
+    async update(request: Request, response: Response){
 
         var {id, suborder_id, product_id, quantity} = request.body
 
@@ -43,9 +45,9 @@ export class OrderController {
         product_id = Array.isArray(product_id) ? product_id : [product_id]
         quantity = Array.isArray(quantity) ? quantity : [quantity]
 
-        const editOrderService = new EditOrderService()
+        const updateOrderService = new UpdateOrderService()
 
-        await editOrderService.execute({id, suborder_id, product_id, quantity})
+        await updateOrderService.execute({id, suborder_id, product_id, quantity})
     }
 
 }

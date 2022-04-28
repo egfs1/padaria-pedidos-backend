@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import { CreateProductService } from "../services/Products/CreateProductService";
 import { DeleteProductService } from "../services/Products/DeleteProductService";
-import { EditProductService } from "../services/Products/EditProductService";
+import { UpdateProductService } from "../services/Products/UpdateProductService";
 import { ListProductService } from "../services/Products/ListProductService";
 
 export class ProductController {
@@ -32,12 +32,12 @@ export class ProductController {
 
     }
 
-    async edit(request: Request, response: Response){
+    async update(request: Request, response: Response){
         const {id, name} = request.body
 
-        const editProductService = new EditProductService()
+        const updateProductService = new UpdateProductService()
 
-        await editProductService.execute({id, name})
+        await updateProductService.execute({id, name})
 
     }
 }

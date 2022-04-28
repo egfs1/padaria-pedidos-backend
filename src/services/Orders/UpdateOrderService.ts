@@ -7,7 +7,7 @@ interface IRequest {
     quantity: number[]
 }
 
-export class EditOrderService {
+export class UpdateOrderService {
     async execute({id, suborder_id, product_id, quantity}: IRequest){
         try {
 

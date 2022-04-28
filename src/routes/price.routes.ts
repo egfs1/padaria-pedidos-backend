@@ -8,6 +8,6 @@ const priceController = new PriceController()
 router.get('/', priceController.index)
 router.post('/save', priceController.create)
 router.delete('/delete', priceController.delete)
-router.put('/update/:id', priceController.edit)
+router.put('/update/:id', priceController.update)
 
 export default router

@@ -7,7 +7,7 @@ interface IRequest {
     product_id: string
 }
 
-export class EditPriceService {
+export class UpdatePriceService {
     async execute({id, price, company_id, product_id}: IRequest){
         try {
             return await prismaClient.prices.update({
