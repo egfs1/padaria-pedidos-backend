@@ -1,7 +1,7 @@
 import prismaClient from "../../prisma"
 
 
-export class ListPricesService {
+export class ListPriceService {
     async execute(){
         try {
             return await prismaClient.prices.findMany()
