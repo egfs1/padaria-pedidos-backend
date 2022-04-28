@@ -17,7 +17,7 @@ export class EditProductService {
                 }
             })
         }catch(e){
-            throw new Error("Something is wrong")
+            throw new Error("Product not found!")
         }
     }
 }
