@@ -8,6 +8,6 @@ const companyController = new CompanyController()
 router.get('/', companyController.index)
 router.post('/save', companyController.create)
 router.delete('/delete', companyController.delete)
-router.put('/edit/:id', companyController.edit)
+router.put('/update/:id', companyController.edit)
 
 export default router
