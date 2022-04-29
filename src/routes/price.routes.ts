@@ -6,6 +6,7 @@ const router = Router()
 const priceController = new PriceController()
 
 router.get('/', priceController.index)
+router.get('/edit/:id', priceController.edit)
 router.post('/save', priceController.create)
 router.delete('/delete', priceController.delete)
 router.put('/update/:id', priceController.update)

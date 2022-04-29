@@ -3,6 +3,7 @@ import { CreatePriceService } from "../services/Prices/CreatePriceService"
 import { DeletePriceService } from "../services/Prices/DeletePriceService"
 import { UpdatePriceService } from "../services/Prices/UpdatePriceService"
 import { IndexPriceService } from "../services/Prices/IndexPriceService"
+import { EditPriceService } from "../services/Prices/EditPriceService"
 
 export class PriceController {
     async index(request: Request, response: Response){
@@ -39,5 +40,15 @@ export class PriceController {
 
         await updatePriceService.execute({id, price, company_id, product_id})
 
+    }
+
+    async edit(request: Request, response: Response){
+        const {id} = request.params
+
+        const editPriceService = new EditPriceService()
+
+        const result = await editPriceService.execute({id})
+
+        return result
     }
 }

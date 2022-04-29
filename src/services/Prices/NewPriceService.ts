@@ -7,19 +7,23 @@ interface IRequest {
 
 export class NewPriceService {
     async execute({company_id} : IRequest) {
-        const company = await prismaClient.companies.findUnique({
-            where: {
-                id: company_id
-            }
-        })
-        const products = await prismaClient.products.findMany({
-            orderBy: [
-                {
-                    updatedAt: 'desc'
+        try {
+            const company = await prismaClient.companies.findUnique({
+                where: {
+                    id: company_id
                 }
-            ]
-        })
-
-        return [company,products]
+            })
+            const products = await prismaClient.products.findMany({
+                orderBy: [
+                    {
+                        updatedAt: 'desc'
+                    }
+                ]
+            })
+    
+            return [company,products]
+        } catch (error) {
+            throw new Error('Something is wrong')
+        }
     }  
 }
