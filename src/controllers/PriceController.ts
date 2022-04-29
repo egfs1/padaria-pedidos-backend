@@ -49,6 +49,6 @@ export class PriceController {
 
         const result = await editPriceService.execute({id})
 
-        return result
+        return response.json(result)
     }
 }

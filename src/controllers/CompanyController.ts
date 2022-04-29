@@ -49,6 +49,6 @@ export class CompanyController {
 
         const result = await editCompanyService.execute({id})
 
-        return result
+        return response.json(result)
     }
 }

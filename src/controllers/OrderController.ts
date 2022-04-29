@@ -4,6 +4,7 @@ import { UpdateOrderService } from "../services/Orders/UpdateOrderService";
 import { DeleteOrderService } from '../services/Orders/DeleteOrderService'
 import { IndexOrderService } from "../services/Orders/IndexOrderService";
 import { EditOrderService } from "../services/Orders/EditOrderService";
+import { QuantitativeOrderService } from "../services/Orders/QuantitativeOrderService";
 
 export class OrderController {
 
@@ -58,7 +59,18 @@ export class OrderController {
 
         const result = await editOrderService.execute({id})
 
-        return result
+        return response.json(result)
+    }
+
+    async quantitative(request: Request, response: Response){
+        const {company_id, month} = request.params
+
+
+        const quantitativeOrderService = new QuantitativeOrderService()
+
+        const result = await quantitativeOrderService.execute({company_id, month: parseInt(month)})
+
+        return response.json(result)
     }
 }
 

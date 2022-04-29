@@ -49,6 +49,6 @@ export class ProductController {
 
         const result = await editProductService.execute({id})
 
-        return result
+        return response.json(result)
     }
 }
