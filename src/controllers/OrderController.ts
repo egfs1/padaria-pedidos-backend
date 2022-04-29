@@ -2,14 +2,14 @@ import { Request, Response } from "express";
 import { CreateOrderService } from "../services/Orders/CreateOrderService";
 import { UpdateOrderService } from "../services/Orders/UpdateOrderService";
 import { DeleteOrderService } from '../services/Orders/DeleteOrderService'
-import { ListOrderService } from "../services/Orders/ListOrderService";
+import { IndexOrderService } from "../services/Orders/IndexOrderService";
 
 export class OrderController {
 
     async index(request: Request, response: Response){
-        const listOrderService = new ListOrderService()
+        const indexOrderService = new IndexOrderService()
 
-        const result = listOrderService.execute()
+        const result = indexOrderService.execute()
 
         return response.json(result)
     }

@@ -1,7 +1,7 @@
 import prismaClient from "../../prisma"
 
 
-export class ListOrderService {
+export class IndexOrderService {
     async execute(){
         try {
             const orders = await prismaClient.orders.findMany({

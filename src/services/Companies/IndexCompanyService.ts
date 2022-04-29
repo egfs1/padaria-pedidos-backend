@@ -1,10 +1,10 @@
 import prismaClient from "../../prisma"
 
 
-export class ListProductService {
+export class IndexCompanyService {
     async execute(){
         try {
-            return await prismaClient.products.findMany({
+            return await prismaClient.companies.findMany({
                 orderBy: [
                     {
                         updatedAt: 'desc'

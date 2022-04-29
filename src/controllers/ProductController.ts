@@ -2,13 +2,13 @@ import { Request, Response } from "express";
 import { CreateProductService } from "../services/Products/CreateProductService";
 import { DeleteProductService } from "../services/Products/DeleteProductService";
 import { UpdateProductService } from "../services/Products/UpdateProductService";
-import { ListProductService } from "../services/Products/ListProductService";
+import { IndexProductService } from "../services/Products/IndexProductService";
 
 export class ProductController {
     async index(request: Request, response: Response){
-        const listProductService = new ListProductService()
+        const indexProductService = new IndexProductService()
 
-        const products = await listProductService.execute()
+        const products = await indexProductService.execute()
 
         return response.json(products)
     }

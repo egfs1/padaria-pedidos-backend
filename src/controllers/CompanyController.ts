@@ -1,14 +1,14 @@
 import { CreateCompanyService } from "../services/Companies/CreateCompanyService"
 import { DeleteCompanyService } from "../services/Companies/DeleteCompanyService"
 import { UpdateCompanyService } from "../services/Companies/UpdateCompanyService"
-import { ListCompanyService } from "../services/Companies/ListCompanyService"
+import { IndexCompanyService } from "../services/Companies/IndexCompanyService"
 import { Request, Response } from "express"
 
 export class CompanyController {
     async index(request: Request, response: Response){
-        const listCompanyService = new ListCompanyService()
+        const indexCompanyService = new IndexCompanyService()
 
-        const companies = await listCompanyService.execute()
+        const companies = await indexCompanyService.execute()
 
         return response.json(companies)
     }

@@ -2,13 +2,13 @@ import { Request, Response } from "express"
 import { CreatePriceService } from "../services/Prices/CreatePriceService"
 import { DeletePriceService } from "../services/Prices/DeletePriceService"
 import { UpdatePriceService } from "../services/Prices/UpdatePriceService"
-import { ListPriceService } from "../services/Prices/ListPriceService"
+import { IndexPriceService } from "../services/Prices/IndexPriceService"
 
 export class PriceController {
     async index(request: Request, response: Response){
-        const listPriceService = new ListPriceService()
+        const indexPriceService = new IndexPriceService()
 
-        const result = await listPriceService.execute()
+        const result = await indexPriceService.execute()
 
         return response.json(result)
     }
