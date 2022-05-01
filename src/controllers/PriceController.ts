@@ -38,11 +38,11 @@ export class PriceController {
     async update(request: Request, response: Response){
         const {id} = request.params
         
-        const {price, company_id, product_id} = request.body
+        const {price} = request.body
 
         const updatePriceService = new UpdatePriceService()
 
-        await updatePriceService.execute({id, price, company_id, product_id})
+        await updatePriceService.execute({id, price})
 
         return response.sendStatus(204)
     }
