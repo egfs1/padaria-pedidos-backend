@@ -31,17 +31,20 @@ export class OrderController {
     }
 
     async delete(request: Request, response: Response){
-        const {id} = request.body
+        const {id} = request.params
 
         const deleteOrderService = new DeleteOrderService()
 
         await deleteOrderService.execute({id})
 
+        return response.sendStatus(204)
+
     }
 
     async update(request: Request, response: Response){
+        const {id} = request.params
 
-        var {id, suborder_id, product_id, quantity} = request.body
+        var {suborder_id, product_id, quantity} = request.body
 
         suborder_id = Array.isArray(suborder_id) ? suborder_id : [suborder_id]
         product_id = Array.isArray(product_id) ? product_id : [product_id]
@@ -50,6 +53,8 @@ export class OrderController {
         const updateOrderService = new UpdateOrderService()
 
         await updateOrderService.execute({id, suborder_id, product_id, quantity})
+        
+        return response.sendStatus(204)
     }
 
     async edit(request: Request, response: Response){
@@ -64,7 +69,6 @@ export class OrderController {
 
     async quantitative(request: Request, response: Response){
         const {company_id, month} = request.params
-
 
         const quantitativeOrderService = new QuantitativeOrderService()
 

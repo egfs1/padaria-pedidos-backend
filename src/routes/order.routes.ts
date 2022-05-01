@@ -9,7 +9,7 @@ router.get('/', orderController.index)
 router.get('/edit/:id', orderController.edit)
 router.get('/quantitative/:company_id/:month', orderController.quantitative)
 router.post('/save', orderController.create)
-router.delete('/delete', orderController.delete)
-router.put('/update', orderController.update)
+router.delete('/delete/:id', orderController.delete)
+router.put('/update/:id', orderController.update)
 
 export default router

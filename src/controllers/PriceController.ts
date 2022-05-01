@@ -25,21 +25,26 @@ export class PriceController {
     }
 
     async delete(request: Request, response: Response){
-        const {id} = request.body
+        const {id} = request.params
 
         const deletePriceService = new DeletePriceService()
 
         await deletePriceService.execute({id})
 
+        return response.sendStatus(204)
+
     }
 
     async update(request: Request, response: Response){
-        const {id, price, company_id, product_id} = request.body
+        const {id} = request.params
+        
+        const {price, company_id, product_id} = request.body
 
         const updatePriceService = new UpdatePriceService()
 
         await updatePriceService.execute({id, price, company_id, product_id})
 
+        return response.sendStatus(204)
     }
 
     async edit(request: Request, response: Response){

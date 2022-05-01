@@ -25,21 +25,26 @@ export class ProductController {
     }
 
     async delete(request: Request, response: Response){
-        const {id} = request.body
+        const {id} = request.params
 
         const deleteProductService = new DeleteProductService()
 
         await deleteProductService.execute({id})
 
+        return response.sendStatus(204)
+
     }
 
     async update(request: Request, response: Response){
-        const {id, name} = request.body
+        const {id} = request.params
+
+        const {name} = request.body
 
         const updateProductService = new UpdateProductService()
 
         await updateProductService.execute({id, name})
 
+        return response.sendStatus(204)
     }
 
     async edit(request: Request, response: Response){

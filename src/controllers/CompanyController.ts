@@ -25,21 +25,26 @@ export class CompanyController {
     }
 
     async delete(request: Request, response: Response){
-        const {id} = request.body
+        const {id} = request.params
 
         const deleteCompanyService = new DeleteCompanyService()
 
         await deleteCompanyService.execute({id})
 
+        return response.sendStatus(204)
+
     }
 
     async update(request: Request, response: Response){
-        const {id, name} = request.body
+        const {id} = request.params
+
+        const {name} = request.body
 
         const updateCompanyService = new UpdateCompanyService()
 
         await updateCompanyService.execute({id, name})
 
+        return response.sendStatus(204)
     }
 
     async edit(request: Request, response: Response){

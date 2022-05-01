@@ -8,7 +8,7 @@ const priceController = new PriceController()
 router.get('/', priceController.index)
 router.get('/edit/:id', priceController.edit)
 router.post('/save', priceController.create)
-router.delete('/delete', priceController.delete)
+router.delete('/delete/:id', priceController.delete)
 router.put('/update/:id', priceController.update)
 
 export default router
