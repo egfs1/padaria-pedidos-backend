@@ -9,9 +9,9 @@ export class PriceController {
     async index(request: Request, response: Response){
         const indexPriceService = new IndexPriceService()
 
-        const result = await indexPriceService.execute()
+        const prices = await indexPriceService.execute()
 
-        return response.json(result)
+        return response.json(prices)
     }
 
     async create(request: Request, response: Response){
@@ -19,7 +19,7 @@ export class PriceController {
 
         const createPriceService = new CreatePriceService()
 
-        const _price = await createPriceService.execute({price, company_id, product_id})
+        const _price = await createPriceService.execute({price: parseFloat(price), company_id, product_id})
 
         return response.json(_price)
     }
@@ -56,4 +56,5 @@ export class PriceController {
 
         return response.json(result)
     }
+
 }
