@@ -4,7 +4,7 @@ import prismaClient from "../../prisma"
 export class IndexOrderService {
     async execute(){
         try {
-            const orders = await prismaClient.orders.findMany({
+            return await prismaClient.orders.findMany({
                 orderBy: [
                     {
                         date: 'desc'
@@ -14,18 +14,6 @@ export class IndexOrderService {
                     company: true
                 }
             })
-
-            const companies = await prismaClient.companies.findMany({
-                orderBy: [
-                    {
-                        name: 'desc'
-                    },
-                ],
-            })
-
-            return [orders,companies]
-
-
         }catch(e){
             throw new Error("Something is wrong!")
         }

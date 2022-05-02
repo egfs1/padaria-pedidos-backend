@@ -21,7 +21,6 @@ export class CreatePriceService {
                 throw new Error("Price already exists")
             }
 
-
             return await prismaClient.prices.create({
                 data: {
                     price: price,

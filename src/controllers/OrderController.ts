@@ -11,9 +11,9 @@ export class OrderController {
     async index(request: Request, response: Response){
         const indexOrderService = new IndexOrderService()
 
-        const result = indexOrderService.execute()
+        const orders = await indexOrderService.execute()
 
-        return response.json(result)
+        return response.json(orders)
     }
 
     async create(request: Request, response: Response){
