@@ -17,7 +17,7 @@ export class CreatePriceService {
                 }
             })
 
-            if (_price == null){
+            if (_price != null){
                 throw new Error("Price already exists")
             }
 
