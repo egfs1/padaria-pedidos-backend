@@ -3,12 +3,13 @@ import prismaClient from "../../prisma"
 interface IRequest {
     company_id: string, 
     date: Date,
-    product_id: string[],
+    product_id: string[]
+    product_price: number[]
     quantity: number[]
 }
 
 export class CreateOrderService {
-    async execute({company_id, date, product_id, quantity}: IRequest){
+    async execute({company_id, date, product_id, product_price, quantity}: IRequest){
         try {
             const order = await prismaClient.orders.create({
                 data: {
@@ -20,16 +21,8 @@ export class CreateOrderService {
     
             var totalValue = 0
             for (let index = 0; index < product_id.length; index++) {
-                
-                var price = await prismaClient.prices.findFirst({
-                    where: {
-                        company_id: company_id,
-                        product_id: product_id[index],
-                    },
-                    rejectOnNotFound: true
-                })
-    
-                var value = price.price * quantity[index]
+
+                const value = product_price[index] * quantity[index]
     
                 await prismaClient.subOrders.create({
                     data: {
@@ -40,7 +33,7 @@ export class CreateOrderService {
                         value: value
                     }
                 })
-    
+                
                 totalValue += value
             }
 

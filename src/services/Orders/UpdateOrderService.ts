@@ -3,6 +3,7 @@ import prismaClient from "../../prisma"
 interface ISubOrder {
     id: string
     product_id: string
+    product_price: number
     quantity: string
 }
 
@@ -44,15 +45,7 @@ export class UpdateOrderService {
             var totalValue = 0
             for (let index = 0; index < subOrders.length; index++) {
 
-                var price = await prismaClient.prices.findFirst({
-                    where: {
-                        company_id: order.company_id,
-                        product_id: subOrders[index].product_id,
-                    },
-                    rejectOnNotFound: true
-                })
-
-                var value = price.price*parseFloat(subOrders[index].quantity)
+                var value = subOrders[index].product_price*parseFloat(subOrders[index].quantity)
 
                 if(subOrders[index].id){
                     await prismaClient.subOrders.update({

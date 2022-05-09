@@ -18,11 +18,11 @@ export class OrderController {
 
     async create(request: Request, response: Response){
 
-        var {company_id, date, product_id, quantity} = request.body
+        var {company_id, date, product_id, product_price, quantity} = request.body
 
         const createOrderService = new CreateOrderService()
 
-        const order = await createOrderService.execute({company_id, date, product_id, quantity})
+        const order = await createOrderService.execute({company_id, date, product_id, product_price, quantity})
     
         return response.json(order)
     }
