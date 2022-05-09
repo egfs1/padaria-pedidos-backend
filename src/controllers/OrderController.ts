@@ -41,7 +41,7 @@ export class OrderController {
     async update(request: Request, response: Response){
         const {id} = request.params
 
-        var {subOrders} = request.body
+        const {subOrders} = request.body
 
         const updateOrderService = new UpdateOrderService()
 

@@ -3,7 +3,7 @@ import prismaClient from "../../prisma"
 interface ISubOrder {
     id: string
     product_id: string
-    quantity: number
+    quantity: string
 }
 
 interface IRequest {
@@ -14,7 +14,6 @@ interface IRequest {
 export class UpdateOrderService {
     async execute({id, subOrders}: IRequest){
         try {
-
             const order = await prismaClient.orders.findUnique({
                 where: {
                     id: id
@@ -24,16 +23,26 @@ export class UpdateOrderService {
                 },
                 rejectOnNotFound: true
             })
+
+            order.sub_orders.forEach(async orderSubOrder => {
+                var remove = true
+                subOrders.forEach(subOrder => {
+                    if(orderSubOrder.id == subOrder.id){
+                        remove=false
+                    }
+                })
+
+                if(remove){
+                    await prismaClient.subOrders.delete({
+                        where: {
+                            id: orderSubOrder.id
+                        }
+                    })
+                }
+            })
             
             var totalValue = 0
             for (let index = 0; index < subOrders.length; index++) {
-
-                subOrders.forEach(suborder=>{
-                    if(suborder.id == subOrders[index].id){
-                        const index = subOrders.indexOf(suborder)
-                        subOrders.splice(index, 1)
-                    }
-                })
 
                 var price = await prismaClient.prices.findFirst({
                     where: {
@@ -43,9 +52,9 @@ export class UpdateOrderService {
                     rejectOnNotFound: true
                 })
 
-                var value = price.price*subOrders[index].quantity
+                var value = price.price*parseFloat(subOrders[index].quantity)
 
-                if(subOrders[index].id != null){
+                if(subOrders[index].id){
                     await prismaClient.subOrders.update({
                         where: {
                             id: subOrders[index].id
@@ -53,7 +62,7 @@ export class UpdateOrderService {
                         data: {
                             product_id: subOrders[index].product_id,
                             order_id: id,
-                            quantity: subOrders[index].quantity,
+                            quantity: parseFloat(subOrders[index].quantity),
                             value: value
                         }
                     })             
@@ -63,7 +72,7 @@ export class UpdateOrderService {
                             company_id: order.company_id,
                             product_id: subOrders[index].product_id,
                             order_id: id,
-                            quantity: subOrders[index].quantity,
+                            quantity: parseFloat(subOrders[index].quantity),
                             value: value
                         }
                     })        
@@ -71,14 +80,6 @@ export class UpdateOrderService {
 
                 totalValue += value
             }
-
-            subOrders.forEach(async suborder => {
-                await prismaClient.subOrders.delete({
-                    where: {
-                        id: suborder.id
-                    }
-                })
-            })
             
             await prismaClient.orders.update({
                 where: {
@@ -88,7 +89,6 @@ export class UpdateOrderService {
                     value: totalValue
                 }
             })
-    
             
         } catch (error) {
             throw new Error('Something is wrong')
