@@ -11,8 +11,7 @@ export class IndexOrderService {
                     },
                 ],
                 include: {
-                    company: true,
-                    sub_orders: true
+                    company: true
                 }
             })
         }catch(e){

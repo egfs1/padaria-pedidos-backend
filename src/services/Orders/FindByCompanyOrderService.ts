@@ -17,7 +17,8 @@ export class FindByCompanyOrderService {
                     },
                 ],
                 include: {
-                    sub_orders: true
+                    sub_orders: true,
+                    company: true
                 }
             })
         }catch(e){
