@@ -20,9 +20,6 @@ export class OrderController {
 
         var {company_id, date, product_id, quantity} = request.body
 
-        product_id = Array.isArray(product_id) ? product_id : [product_id]
-        quantity = Array.isArray(quantity) ? quantity : [quantity]
-
         const createOrderService = new CreateOrderService()
 
         const order = await createOrderService.execute({company_id, date, product_id, quantity})
@@ -44,15 +41,11 @@ export class OrderController {
     async update(request: Request, response: Response){
         const {id} = request.params
 
-        var {suborder_id, product_id, quantity} = request.body
-
-        suborder_id = Array.isArray(suborder_id) ? suborder_id : [suborder_id]
-        product_id = Array.isArray(product_id) ? product_id : [product_id]
-        quantity = Array.isArray(quantity) ? quantity : [quantity]
+        var {subOrders} = request.body
 
         const updateOrderService = new UpdateOrderService()
 
-        await updateOrderService.execute({id, suborder_id, product_id, quantity})
+        await updateOrderService.execute({id, subOrders})
         
         return response.sendStatus(204)
     }

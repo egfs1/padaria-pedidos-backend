@@ -20,7 +20,7 @@ export class CreateOrderService {
     
             var totalValue = 0
             for (let index = 0; index < product_id.length; index++) {
-    
+                
                 var price = await prismaClient.prices.findFirst({
                     where: {
                         company_id: company_id,

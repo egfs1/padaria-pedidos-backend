@@ -1,14 +1,18 @@
 import prismaClient from "../../prisma"
 
+interface ISubOrder {
+    id: string
+    product_id: string
+    quantity: number
+}
+
 interface IRequest {
     id: string,
-    suborder_id: string[],
-    product_id: string[],
-    quantity: number[]
+    subOrders: ISubOrder[]
 }
 
 export class UpdateOrderService {
-    async execute({id, suborder_id, product_id, quantity}: IRequest){
+    async execute({id, subOrders}: IRequest){
         try {
 
             const order = await prismaClient.orders.findUnique({
@@ -20,16 +24,12 @@ export class UpdateOrderService {
                 },
                 rejectOnNotFound: true
             })
-
-            var subOrders = order.sub_orders
             
             var totalValue = 0
-
-            for (let index = 0; index < suborder_id.length; index++) {
-                
+            for (let index = 0; index < subOrders.length; index++) {
 
                 subOrders.forEach(suborder=>{
-                    if(suborder.id == suborder_id[index]){
+                    if(suborder.id == subOrders[index].id){
                         const index = subOrders.indexOf(suborder)
                         subOrders.splice(index, 1)
                     }
@@ -38,22 +38,22 @@ export class UpdateOrderService {
                 var price = await prismaClient.prices.findFirst({
                     where: {
                         company_id: order.company_id,
-                        product_id: product_id[index],
+                        product_id: subOrders[index].product_id,
                     },
                     rejectOnNotFound: true
                 })
 
-                var value = price.price*quantity[index]
+                var value = price.price*subOrders[index].quantity
 
-                if(suborder_id[index]!= 'null'){
+                if(subOrders[index].id != null){
                     await prismaClient.subOrders.update({
                         where: {
-                            id: suborder_id[index]
+                            id: subOrders[index].id
                         },
                         data: {
-                            product_id: product_id[index],
+                            product_id: subOrders[index].product_id,
                             order_id: id,
-                            quantity: quantity[index],
+                            quantity: subOrders[index].quantity,
                             value: value
                         }
                     })             
@@ -61,9 +61,9 @@ export class UpdateOrderService {
                     await prismaClient.subOrders.create({
                         data: {
                             company_id: order.company_id,
-                            product_id: product_id[index],
+                            product_id: subOrders[index].product_id,
                             order_id: id,
-                            quantity: quantity[index],
+                            quantity: subOrders[index].quantity,
                             value: value
                         }
                     })        
