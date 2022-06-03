@@ -6,7 +6,6 @@ const router = Router()
 const orderController = new OrderController()
 
 router.get('/', orderController.index)
-router.get('/edit/:id', orderController.edit)
 router.get('/quantitative/:company_id/:month', orderController.quantitative)
 router.get('/company/:company_id', orderController.findByCompany)
 router.post('/save', orderController.create)

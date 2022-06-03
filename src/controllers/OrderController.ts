@@ -3,7 +3,6 @@ import { CreateOrderService } from "../services/Orders/CreateOrderService";
 import { UpdateOrderService } from "../services/Orders/UpdateOrderService";
 import { DeleteOrderService } from '../services/Orders/DeleteOrderService'
 import { IndexOrderService } from "../services/Orders/IndexOrderService";
-import { EditOrderService } from "../services/Orders/EditOrderService";
 import { QuantitativeOrderService } from "../services/Orders/QuantitativeOrderService";
 import { FindByCompanyOrderService } from "../services/Orders/FindByCompanyOrderService";
 
@@ -49,16 +48,6 @@ export class OrderController {
         await updateOrderService.execute({id, subOrders})
         
         return response.sendStatus(204)
-    }
-
-    async edit(request: Request, response: Response){
-        const {id} = request.params
-
-        const editOrderService = new EditOrderService()
-
-        const result = await editOrderService.execute({id})
-
-        return response.json(result)
     }
 
     async findByCompany(request: Request, response: Response){

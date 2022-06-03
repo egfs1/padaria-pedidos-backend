@@ -3,7 +3,6 @@ import { CreateProductService } from "../services/Products/CreateProductService"
 import { DeleteProductService } from "../services/Products/DeleteProductService";
 import { UpdateProductService } from "../services/Products/UpdateProductService";
 import { IndexProductService } from "../services/Products/IndexProductService";
-import { EditProductService } from "../services/Products/EditProductService";
 
 export class ProductController {
     async index(request: Request, response: Response){
@@ -45,15 +44,5 @@ export class ProductController {
         await updateProductService.execute({id, name})
 
         return response.sendStatus(204)
-    }
-
-    async edit(request: Request, response: Response){
-        const {id} = request.params
-
-        const editProductService = new EditProductService()
-
-        const result = await editProductService.execute({id})
-
-        return response.json(result)
     }
 }

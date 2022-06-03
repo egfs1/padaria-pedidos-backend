@@ -3,7 +3,6 @@ import { DeleteCompanyService } from "../services/Companies/DeleteCompanyService
 import { UpdateCompanyService } from "../services/Companies/UpdateCompanyService"
 import { IndexCompanyService } from "../services/Companies/IndexCompanyService"
 import { Request, Response } from "express"
-import { EditCompanyService } from "../services/Companies/EditCompanyService"
 
 export class CompanyController {
     async index(request: Request, response: Response){
@@ -45,15 +44,5 @@ export class CompanyController {
         await updateCompanyService.execute({id, name})
 
         return response.sendStatus(204)
-    }
-
-    async edit(request: Request, response: Response){
-        const {id} = request.params
-
-        const editCompanyService = new EditCompanyService()
-
-        const result = await editCompanyService.execute({id})
-
-        return response.json(result)
     }
 }

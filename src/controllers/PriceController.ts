@@ -3,7 +3,6 @@ import { CreatePriceService } from "../services/Prices/CreatePriceService"
 import { DeletePriceService } from "../services/Prices/DeletePriceService"
 import { UpdatePriceService } from "../services/Prices/UpdatePriceService"
 import { IndexPriceService } from "../services/Prices/IndexPriceService"
-import { EditPriceService } from "../services/Prices/EditPriceService"
 import { FindByCompanyPriceService } from "../services/Prices/FindByCompanyPriceService"
 
 export class PriceController {
@@ -46,16 +45,6 @@ export class PriceController {
         await updatePriceService.execute({id, price})
 
         return response.sendStatus(204)
-    }
-
-    async edit(request: Request, response: Response){
-        const {id} = request.params
-
-        const editPriceService = new EditPriceService()
-
-        const result = await editPriceService.execute({id})
-
-        return response.json(result)
     }
 
     async findByCompany(request: Request, response: Response){
