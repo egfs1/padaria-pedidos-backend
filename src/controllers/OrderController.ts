@@ -5,6 +5,7 @@ import { DeleteOrderService } from '../services/Orders/DeleteOrderService'
 import { IndexOrderService } from "../services/Orders/IndexOrderService";
 import { QuantitativeOrderService } from "../services/Orders/QuantitativeOrderService";
 import { FindByCompanyOrderService } from "../services/Orders/FindByCompanyOrderService";
+import { FindByIdOrderService } from "../services/Orders/FindByIdOrderServicel";
 
 export class OrderController {
 
@@ -48,6 +49,16 @@ export class OrderController {
         await updateOrderService.execute({id, subOrders})
         
         return response.sendStatus(204)
+    }
+
+    async findById(request: Request, response: Response) {
+        const {id} = request.params
+
+        const findByIdOrderService = new FindByIdOrderService()
+
+        const order = await findByIdOrderService.execute({id})
+
+        return response.json(order)
     }
 
     async findByCompany(request: Request, response: Response){

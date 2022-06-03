@@ -4,6 +4,7 @@ import { DeletePriceService } from "../services/Prices/DeletePriceService"
 import { UpdatePriceService } from "../services/Prices/UpdatePriceService"
 import { IndexPriceService } from "../services/Prices/IndexPriceService"
 import { FindByCompanyPriceService } from "../services/Prices/FindByCompanyPriceService"
+import { FindByIdPriceService } from "../services/Prices/FindByIdPriceService"
 
 export class PriceController {
     async index(request: Request, response: Response){
@@ -45,6 +46,16 @@ export class PriceController {
         await updatePriceService.execute({id, price})
 
         return response.sendStatus(204)
+    }
+
+    async findById(request: Request, response: Response) {
+        const {id} = request.params
+
+        const findByIdPriceService = new FindByIdPriceService()
+
+        const price = await findByIdPriceService.execute({id})
+
+        return response.json(price)
     }
 
     async findByCompany(request: Request, response: Response){

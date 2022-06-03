@@ -6,6 +6,7 @@ const router = Router()
 const companyController = new CompanyController()
 
 router.get('/', companyController.index)
+router.get('/:id', companyController.findById)
 router.post('/save', companyController.create)
 router.delete('/delete/:id', companyController.delete)
 router.put('/update/:id', companyController.update)
