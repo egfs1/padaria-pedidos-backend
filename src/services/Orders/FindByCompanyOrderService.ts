@@ -15,11 +15,7 @@ export class FindByCompanyOrderService {
                     {
                         date: 'desc'
                     },
-                ],
-                include: {
-                    sub_orders: true,
-                    company: true
-                }
+                ]
             })
         }catch(e){
             throw new Error("Something is wrong!")
