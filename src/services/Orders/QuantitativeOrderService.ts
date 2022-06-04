@@ -27,12 +27,6 @@ export class QuantitativeOrderService {
                 }
             })
         
-            const company = await prismaClient.companies.findUnique({
-                where: {
-                    id: company_id
-                }
-            })
-        
             const prices = await prismaClient.prices.findMany({
                 orderBy: [
                     {
@@ -80,7 +74,7 @@ export class QuantitativeOrderService {
                 }
             }
     
-            return [quantitatives,company, month, days_left]
+            return [quantitatives, days_left]
 
         } catch (error) {
             throw new Error('Something is wrong')

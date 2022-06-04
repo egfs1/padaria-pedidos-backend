@@ -14,7 +14,8 @@ export class FindByIdPriceService {
                 include: {
                     company: true,
                     product: true
-                }
+                },
+                rejectOnNotFound: true
             })
         }catch(e){
             throw new Error("Price not found!")
