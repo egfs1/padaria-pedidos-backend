@@ -10,11 +10,16 @@ import { ensureIsAuthenticated } from "../middlewares/ensureIsAuthenticated";
 
 const router = Router()
 
+// Authenticate route
 router.use('/', authRouter)
-router.use('/products',ensureIsAuthenticated, productRouter)
-router.use('/companies', ensureIsAuthenticated, companyRouter)
-router.use('/prices', ensureIsAuthenticated, priceRouter)
-router.use('/orders', ensureIsAuthenticated, orderRouter)
-router.use('/users', ensureIsAuthenticated, userRouter)
+
+router.use(ensureIsAuthenticated)
+
+// User routes
+router.use('/orders', orderRouter)
+router.use('/products', productRouter)
+router.use('/companies', companyRouter)
+router.use('/prices', priceRouter)
+router.use('/users', userRouter)
 
 export default router
