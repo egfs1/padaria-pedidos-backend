@@ -1,5 +1,5 @@
 import { compare } from "bcryptjs"
-import { sign, verify } from "jsonwebtoken"
+import { sign } from "jsonwebtoken"
 import prismaClient from "../../prisma"
 
 interface IRequest {
@@ -9,7 +9,6 @@ interface IRequest {
 
 export class AuthService {
     async execute({username, password} : IRequest){
-
         const user = await prismaClient.users.findUnique({
             where: {
                 username
@@ -32,5 +31,6 @@ export class AuthService {
         } else {
             throw new Error('User/Password is wrong!')
         }
+
     }
 }

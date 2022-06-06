@@ -1,8 +1,8 @@
 import express from 'express'
-import cors from 'cors'
 import 'express-async-errors'
-import handleErrors from './errors'
+import cors from 'cors'
 import router from './routes'
+import handleErrors from './errors'
 
 const app = express()
 

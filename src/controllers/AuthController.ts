@@ -7,7 +7,7 @@ export class AuthController {
 
         const authService = new AuthService()
 
-        const token = authService.execute({username, password})
+        const token = await authService.execute({username, password})
 
         return response.json(token)
     }
