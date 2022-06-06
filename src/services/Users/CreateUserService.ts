@@ -1,6 +1,5 @@
 import { hash } from "bcryptjs"
 import prismaClient from "../../prisma"
-import { AuthService } from "../Auth/AuthService"
 
 interface IRequest {
     username: string
