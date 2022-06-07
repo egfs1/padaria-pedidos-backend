@@ -27,7 +27,7 @@ export class AuthService {
                 expiresIn: '7d'
             })
 
-            return token
+            return {token, isAdmin: user.isAdmin}
         } else {
             throw new Error('User/Password is wrong!')
         }

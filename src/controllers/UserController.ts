@@ -13,8 +13,6 @@ export class UserController {
 
         const token = await authService.execute({username, password})
 
-        console.log(token)
-
         return response.json(token)
     }
 }
