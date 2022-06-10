@@ -42,11 +42,11 @@ export class OrderController {
     async update(request: Request, response: Response){
         const {id} = request.params
 
-        const {subOrders} = request.body
+        const {subOrders, date} = request.body
 
         const updateOrderService = new UpdateOrderService()
 
-        await updateOrderService.execute({id, subOrders})
+        await updateOrderService.execute({id, subOrders, date})
         
         return response.sendStatus(204)
     }

@@ -10,10 +10,11 @@ interface ISubOrder {
 interface IRequest {
     id: string,
     subOrders: ISubOrder[]
+    date: string
 }
 
 export class UpdateOrderService {
-    async execute({id, subOrders}: IRequest){
+    async execute({id, subOrders, date}: IRequest){
         try {
             const order = await prismaClient.orders.findUnique({
                 where: {
@@ -41,7 +42,6 @@ export class UpdateOrderService {
                     })
                 }
             })
-            
             var totalValue = 0
             for (let index = 0; index < subOrders.length; index++) {
 
@@ -58,7 +58,7 @@ export class UpdateOrderService {
                             quantity: parseFloat(subOrders[index].quantity),
                             value: value
                         }
-                    })             
+                    })           
                 } else {         
                     await prismaClient.subOrders.create({
                         data: {
@@ -79,7 +79,8 @@ export class UpdateOrderService {
                     id: id
                 },
                 data: {
-                    value: totalValue
+                    value: totalValue,
+                    date
                 }
             })
             
