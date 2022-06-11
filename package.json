@@ -22,6 +22,7 @@
   },
   "scripts": {
     "dev": "ts-node-dev src/server.ts",
+    "build": "yarn tsc",
     "dist": "node dist/server.js"
   }
 }
