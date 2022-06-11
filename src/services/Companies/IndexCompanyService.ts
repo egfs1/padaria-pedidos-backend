@@ -7,7 +7,7 @@ export class IndexCompanyService {
             return await prismaClient.companies.findMany({
                 orderBy: [
                     {
-                        name: 'desc'
+                        name: 'asc'
                     }
                 ]
             })
