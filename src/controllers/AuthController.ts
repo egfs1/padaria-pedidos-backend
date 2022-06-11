@@ -8,6 +8,8 @@ export class AuthController {
 
         const ipAddress = String(request.socket.remoteAddress)
 
+        console.log(ipAddress)
+
         const authService = new AuthService()
 
         const token = await authService.execute({username, password, ipAddress})
@@ -19,6 +21,8 @@ export class AuthController {
         const { token } = request.body
 
         const ipAddress = String(request.socket.remoteAddress)
+
+        console.log(ipAddress)
 
         const meAuthService = new MeAuthService()
 

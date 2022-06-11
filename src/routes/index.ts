@@ -12,6 +12,7 @@ const router = Router()
 
 // Authenticate route
 router.use('/', authRouter)
+router.use('/users', userRouter)
 
 router.use(ensureIsAuthenticated)
 
@@ -20,6 +21,5 @@ router.use('/orders', orderRouter)
 router.use('/products', productRouter)
 router.use('/companies', companyRouter)
 router.use('/prices', priceRouter)
-router.use('/users', userRouter)
 
 export default router
