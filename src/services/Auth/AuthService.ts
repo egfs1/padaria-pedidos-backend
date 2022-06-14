@@ -5,11 +5,11 @@ import prismaClient from "../../prisma"
 interface IRequest {
     username: string
     password: string
-    ipAddress: string
 }
 
 export class AuthService {
-    async execute({username, password, ipAddress} : IRequest){
+    async execute({username, password} : IRequest){
+
         const user = await prismaClient.users.findUnique({
             where: {
                 username
@@ -22,9 +22,8 @@ export class AuthService {
         const passwordMatch = await compare(password, user.password)
 
         if (passwordMatch){
-            const token = sign({
-                ipAddress
-            }, String(process.env.JWT_SECRET), {
+            const token = sign({}, 
+                String(process.env.JWT_SECRET), {
                 subject: user.id,
                 expiresIn: '7d'
             })

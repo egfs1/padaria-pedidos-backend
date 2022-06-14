@@ -8,16 +8,12 @@ export class UserController {
     async create(request: Request, response: Response){
         const { username, password, isAdmin} = request.body
 
-        const ipAddress = String(request.socket.remoteAddress)
-
-        console.log(ipAddress)
-
         const createUserService = new CreateUserService()
         const authService = new AuthService()
 
         await createUserService.execute({username, password, isAdmin})
 
-        const token = await authService.execute({username, password, ipAddress})
+        const token = await authService.execute({username, password})
 
         return response.json(token)
     }
@@ -25,16 +21,12 @@ export class UserController {
     async createIfHaveNotAdmin(request: Request, response: Response){
         const { username, password, isAdmin} = request.body
 
-        const ipAddress = String(request.socket.remoteAddress)
-
-        console.log(ipAddress)
-
         const createIfHaveNotAdminUserService = new CreateIfHaveNotAdminUserService()
         const authService = new AuthService()
 
         await createIfHaveNotAdminUserService.execute({username, password, isAdmin})
 
-        const token = await authService.execute({username, password, ipAddress})
+        const token = await authService.execute({username, password})
 
         return response.json(token)
     }

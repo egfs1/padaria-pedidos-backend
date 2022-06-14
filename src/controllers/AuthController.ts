@@ -6,13 +6,9 @@ export class AuthController {
     async auth(request: Request, response: Response){
         const { username, password } = request.body
 
-        const ipAddress = String(request.socket.remoteAddress)
-
-        console.log(ipAddress)
-
         const authService = new AuthService()
 
-        const token = await authService.execute({username, password, ipAddress})
+        const token = await authService.execute({username, password})
 
         return response.json(token)
     }
@@ -20,13 +16,9 @@ export class AuthController {
     async me(request: Request, response: Response){
         const { token } = request.body
 
-        const ipAddress = String(request.socket.remoteAddress)
-
-        console.log(ipAddress)
-
         const meAuthService = new MeAuthService()
 
-        const user = await meAuthService.execute({token, currentIpAdress: ipAddress})
+        const user = await meAuthService.execute({token})
 
         return response.json(user)
     }

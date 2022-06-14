@@ -3,12 +3,10 @@ import { verify } from "jsonwebtoken";
 
 interface IPayload {
     sub: string
-    ipAddress: string
 }
 
 export function ensureIsAuthenticated(request: Request, response: Response, next: NextFunction){
     const authToken = request.headers.authorization
-    const currentIpAddress = request.socket.remoteAddress
 
     if(!authToken){
         return response.status(401).end()
@@ -18,11 +16,7 @@ export function ensureIsAuthenticated(request: Request, response: Response, next
 
     try {
 
-        const { sub, ipAddress } = verify(token, String(process.env.JWT_SECRET)) as IPayload
-
-        if(currentIpAddress !== ipAddress){
-            return response.status(401).end()
-        }
+        const { sub } = verify(token, String(process.env.JWT_SECRET)) as IPayload
         
         request.user_id = sub
         
