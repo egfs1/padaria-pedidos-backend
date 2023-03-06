@@ -4,7 +4,7 @@ import prismaClient from "../../prisma"
 interface IRequest {
     id: string
     username: string
-    password: string | undefined
+    password: string
     isAdmin: boolean
 }
 
@@ -12,7 +12,7 @@ export class UpdateUserService {
     async execute({id, username, password, isAdmin}: IRequest){
         try {
             
-            if(password == undefined){
+            if(password == ""){
                 await prismaClient.users.update({
                     data: {
                         username,
