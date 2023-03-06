@@ -14,6 +14,6 @@ router.use(ensureIsAuthenticated)
 router.use(ensureIsAdmin)
 
 // Only Admin routes
-router.post('/save', userController.create)
+router.post('/create-user', userController.create)
 
 export default router
