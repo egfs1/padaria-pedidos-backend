@@ -14,6 +14,10 @@ router.use(ensureIsAuthenticated)
 router.use(ensureIsAdmin)
 
 // Only Admin routes
-router.post('/create-user', userController.create)
+router.get('/', userController.index)
+router.get('/:id', userController.findById)
+router.post('/save', userController.create)
+router.delete('/delete/:id', userController.delete)
+router.put('/update/:id', userController.update)
 
 export default router
