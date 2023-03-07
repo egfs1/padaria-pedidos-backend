@@ -83,7 +83,7 @@ export class OrderController {
     }
 
     async exists(request: Request, response: Response){
-        const { company_id, date} = request.body
+        const { company_id, date } = request.body
         
         const existsOrderService = new ExistsOrderService()
 
