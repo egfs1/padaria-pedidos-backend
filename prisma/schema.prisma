@@ -84,3 +84,13 @@ model SubOrders {
   @@map("suborders")
 }
 
+model Logs{
+  id String @id @default(uuid())
+  type String
+  message String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("logs")
+}
+

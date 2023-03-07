@@ -6,6 +6,7 @@ import { IndexOrderService } from "../services/Orders/IndexOrderService";
 import { QuantitativeOrderService } from "../services/Orders/QuantitativeOrderService";
 import { FindByCompanyOrderService } from "../services/Orders/FindByCompanyOrderService";
 import { FindByIdOrderService } from "../services/Orders/FindByIdOrderServicel";
+import { ExistsOrderService } from "../services/Orders/ExistsOrderService";
 
 export class OrderController {
 
@@ -79,6 +80,16 @@ export class OrderController {
         const result = await quantitativeOrderService.execute({company_id, month: parseInt(month)})
 
         return response.json(result)
+    }
+
+    async exists(request: Request, response: Response){
+        const { company_id, date} = request.body
+        
+        const existsOrderService = new ExistsOrderService()
+
+        const exists = await existsOrderService.execute({company_id, date})
+
+        return response.json(exists)
     }
 }
 
