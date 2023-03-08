@@ -17,8 +17,8 @@ export class QuantitativeOrderService {
             const orders = await prismaClient.orders.findMany({
                 where: {
                     date: {
-                        gte: new Date(Date.UTC(2022,month-1,1,0,0,0)),
-                        lte: new Date(Date.UTC(2022,month-1,31,23,59,59)),
+                        gte: new Date(Date.UTC(2023,month-1,1,0,0,0)),
+                        lte: new Date(Date.UTC(2023,month-1,31,23,59,59)),
                     },
                     company_id: company_id,
                 },
