@@ -8,10 +8,6 @@ export class ExistsAdminUserService {
             }
         })
 
-        if(user){
-            return true
-        }else {
-            return false
-        }
+        return user != null
     }
 }
