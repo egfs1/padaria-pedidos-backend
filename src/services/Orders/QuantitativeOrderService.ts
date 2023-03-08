@@ -26,7 +26,7 @@ export class QuantitativeOrderService {
                     sub_orders: true
                 }
             })
-        
+
             const prices = await prismaClient.prices.findMany({
                 orderBy: [
                     {
@@ -65,7 +65,7 @@ export class QuantitativeOrderService {
                 })
             }
     
-            const totalDaysInMonth = new Date(2022, month, 0).getDate();
+            const totalDaysInMonth = new Date(2023, month, 0).getDate();
             var days_left: number[] = []
     
             for (let index = 1; index <= totalDaysInMonth; index++) {
